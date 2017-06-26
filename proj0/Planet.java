@@ -29,4 +29,40 @@ public class Planet {
 	    this.imgFileName = p.imgFileName;
 	}
 
+   
+   /** Calculated the distance between two planets. */
+    public double calcDistance(Planet p){
+    	double dx = p.xxPos - this.xxPos;
+    	double dy = p.yyPos - this.yyPos;
+		double r = Math.sqrt((dx * dx) + (dy * dy));  
+		return r;  
+	}   
+
+   
+   /** Return the total force. */
+    public double calcForceExertedBy(Planet p) {
+    	double G = 6.67e-11;
+    	double r = calcDistance(p);
+    	double f = (G * this.mass * p.mass) / (r * r);
+    	return f;
+    } 
+
+    /** Return the force exerted in the X directions. */
+    public double calcForceExertedByX(Planet p) {
+    	double dx = p.xxPos - this.xxPos;
+    	double r = calcDistance(p);
+    	double f = calcForceExertedBy(p);
+    	double fX = f * dx / r;
+    	return fX;
+    }
+
+    /** Force in Y directions. */
+    public double calcForceExertedByY(Planet p) {
+    	double dy = p.yyPos - this.yyPos;
+    	double r = calcDistance(p);
+    	double f = calcForceExertedBy(p);
+    	double fY = f * dy / r;
+    	return fY;
+    }
+
 }
