@@ -31,7 +31,7 @@ public class Planet {
 
    
    /** Calculated the distance between two planets. */
-    public double calcDistance(Planet p){
+    public double calcDistance(Planet p) {
     	double dx = p.xxPos - this.xxPos;
     	double dy = p.yyPos - this.yyPos;
 		double r = Math.sqrt((dx * dx) + (dy * dy));  
@@ -64,5 +64,39 @@ public class Planet {
     	double fY = f * dy / r;
     	return fY;
     }
+    
 
-}
+    /** NetForce from X/Y directions. */
+    public double calcNetForceExertedByX(Planet[] allPlanets) {
+        int len = allPlanets.length;
+        double NetForceX = 0;
+        for (int i = 0; i < len; i ++) {
+            if (allPlanets[i] != this) {
+                NetForceX += calcForceExertedByX(allPlanets[i]);
+            } else {
+                i = i + 1;
+            }
+        }
+        return NetForceX;
+    }
+
+
+    public double calcNetForceExertedByY(Planet[] allPlanets) {
+        int len = allPlanets.length;
+        double NetForceY = 0;
+        for (int i = 0; i < len; i ++) {
+            if (allPlanets[i] != this) {
+                NetForceY += calcForceExertedByY(allPlanets[i]);
+            } else {
+                i = i + 1;
+            }
+        }
+        return NetForceY;
+    }
+
+} /* END OF CLASS */
+
+
+
+
+
