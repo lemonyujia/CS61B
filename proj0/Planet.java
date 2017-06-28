@@ -70,6 +70,7 @@ public class Planet {
     public double calcNetForceExertedByX(Planet[] allPlanets) {
         int len = allPlanets.length;
         double NetForceX = 0;
+
         for (int i = 0; i < len; i ++) {
             if (allPlanets[i] != this) {
                 NetForceX += calcForceExertedByX(allPlanets[i]);
@@ -84,6 +85,7 @@ public class Planet {
     public double calcNetForceExertedByY(Planet[] allPlanets) {
         int len = allPlanets.length;
         double NetForceY = 0;
+
         for (int i = 0; i < len; i ++) {
             if (allPlanets[i] != this) {
                 NetForceY += calcForceExertedByY(allPlanets[i]);
@@ -92,6 +94,19 @@ public class Planet {
             }
         }
         return NetForceY;
+    }
+
+    /** 'void' no return. 
+      *  Velocity and Postion Update from Force. */
+    public void update(double dt, double fX, double fY) {
+        double aX = fX / this.mass;
+        double aY = fY / this.mass;
+
+        this.xxVel = this.xxVel + dt * aX;
+        this.yyVel = this.yyVel + dt * aY;
+
+        this.xxPos = this.xxPos + dt * this.xxVel;
+        this.yyPos = this.yyPos + dt * this.yyVel;
     }
 
 } /* END OF CLASS */
