@@ -1,3 +1,5 @@
+import java.awt.Image;
+
 public class Planet {
 	double xxPos;
 	double yyPos;
@@ -107,6 +109,13 @@ public class Planet {
 
         this.xxPos = this.xxPos + dt * this.xxVel;
         this.yyPos = this.yyPos + dt * this.yyVel;
+    }
+
+
+    /* Draw a planet by itself. */
+    public void draw() {
+        String fileName = "./images/" + this.imgFileName;
+        StdDraw.picture(this.xxPos, this.yyPos, fileName);
     }
 
 } /* END OF CLASS */
