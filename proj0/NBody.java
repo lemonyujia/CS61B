@@ -1,4 +1,5 @@
 import java.awt.Image;
+import java.util.Formatter;
 
 
 public class NBody {
@@ -29,7 +30,6 @@ public class NBody {
 			int N = in.readInt();
             double radius = in.readDouble();
 
-			System.out.println(radius + " is the radius of the universe. ");
 		    return radius;
 	} 
 
@@ -56,10 +56,13 @@ public class NBody {
 		return planets;
 	}
 
+    /******************
+     Simulation main()
+    *******************/
 
     public static void main(String[] args) {
-
         /* Initial Drawing Setion */
+
     	// Collecting all needed input.
     	double T = Double.parseDouble(args[0]);
     	double dt = Double.parseDouble(args[1]);
@@ -79,6 +82,7 @@ public class NBody {
 
 
         /* Animation Creation */
+
         double time = 0;
         // Background Audio
         StdAudio.play("./audio/2001.mid");
@@ -96,16 +100,27 @@ public class NBody {
             for(int i = 0; i < planets.length; i++) {
             	planets[i].update(dt, xForces[i], yForces[i]);
             }
+
         	
         	StdDraw.picture(0, 0, "./images/starfield.jpg");
 
+
         	for(Planet p : planets) {
-        	p.draw();
+        	   p.draw();
         	} 
 
         	StdDraw.show(10);
-
             time += dt;
+
+            }
+
+             /* Print out the final state of universe. */
+            StdOut.printf("%d\n", planets.length);
+            StdOut.printf("%.2e\n", radius);
+            for(int i = 0; i < planets.length; i++) {
+                StdOut.printf("%11.4e %11.4e %11.4e %11.4e %11.4e %12s\n", 
+                    planets[i].xxPos, planets[i].yyPos, planets[i].xxVel, 
+                    planets[i].yyVel, planets[i].mass, planets[i].imgFileName);
         }
   
     } /** End of Main. */
